@@ -1,0 +1,23 @@
+[project]
+name = "psbuilder"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "PythonSwiftLink", email = "pythonswiftlink@gmail.com" }
+]
+requires-python = ">=3.11.6"
+dependencies = [
+    "kivy-ios@git+https://github.com/kivy/kivy-ios@master",
+    "swiftpackagewriter@git+https://github.com/PythonSwiftLink/SwiftPackageWriter@master"
+]
+
+[project.scripts]
+psbuilder = "psbuilder:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv.sources]
+kivy-ios = { git = "https://github.com/kivy/kivy-ios", rev = "master" }
