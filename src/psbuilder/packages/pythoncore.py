@@ -112,7 +112,7 @@ class PythonCore(SwiftPackage):
             shutil.rmtree(sp_lib)
             
         lib_src = join(self.ctx.dist_dir, "root", "python3", "lib")
-        shutil.copytree(lib_src, py_lib_folder)
+        shutil.copytree(lib_src, sp_lib)
         
 
     module_map = """
