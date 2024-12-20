@@ -4,7 +4,7 @@ from psbuilder.package import SwiftPackage, CythonSwiftPackage
 from kivy_ios.toolchain import Recipe
 from kivy_ios.recipes import python3, openssl, libffi
 
-from os.path import basename, join
+from os.path import basename, join, exists
 import plistlib
 import shutil
 import os
@@ -98,6 +98,22 @@ class PythonCore(SwiftPackage):
             if xc_name.startswith("libpython"):
                 self.process_xc(xc)
         return super().pre_zip_xc_frameworks()
+    
+    def post_package(self):
+        export_dir = join(self.swift_package_dir, "export")
+        package = join(export_dir, "PythonCore")
+        sp_sources = join(package, "Sources")
+        
+        py_lib_folder = join(sp_sources, "PythonLibrary")
+        
+        sp_lib = join(py_lib_folder, "lib")
+        
+        if exists(sp_lib):
+            shutil.rmtree(sp_lib)
+            
+        lib_src = join(self.ctx.dist_dir, "root", "python3", "lib")
+        shutil.copytree(lib_src, py_lib_folder)
+        
 
     module_map = """
 module Python [extern_c] {
