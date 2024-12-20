@@ -40,7 +40,7 @@ class SDL2Core(SwiftPackage):
     @property
     def dependencies(self) -> list[SwiftPackage.Dependency]:
         return [
-            #SwiftPackage.Dependency("https://github.com/KivySwiftLink/SDL2Core", version=self.version)
+            SwiftPackage.Dependency("https://github.com/KivySwiftLink/ImageCore", version=self.version)
         ]
 
 
