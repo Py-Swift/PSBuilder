@@ -13,3 +13,4 @@ wheels/
 # psbuilder-generared files
 .cache
 .DS_Store
+uv.lock
