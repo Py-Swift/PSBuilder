@@ -45,6 +45,7 @@ class PythonCore(SwiftPackage):
     
     products = [
         SwiftPackage.Product("PythonCore", ["PythonCore"]),
+        SwiftPackage.Product("PythonLibrary", ["PythonLibrary"])
     ]
     
     targets = [
