@@ -11,6 +11,8 @@ class KivyTarget(SwiftTarget):
     
     name = "KivyCore"
     
+    swiftonize_plugin = True
+    
     recipes = [
         KivyRecipe()
     ]
