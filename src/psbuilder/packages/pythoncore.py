@@ -44,7 +44,7 @@ class PythonCore(SwiftPackage):
     #include_pythonswiftlink = True
     
     products = [
-        SwiftPackage.Product("PythonCore", ["PythonCore", "libpython311", 
+        SwiftPackage.Product("PythonCore", ["PythonCore", "libpython3.11", 
         "libssl", 
         "libcrypto", 
         "libffi"]),
