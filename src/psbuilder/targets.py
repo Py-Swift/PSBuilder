@@ -54,6 +54,8 @@ class SwiftTarget:
     recipes: list[_Recipe] = []
     dependencies: list[PackageDependency | str ] = []
     resources: list[Resource] = []
+    swiftonize_plugin: bool = False
+    
     
     @property
     def linker_settings(self) -> list[LinkerSetting]:
@@ -101,13 +103,22 @@ class SwiftTarget:
     
     @property
     def dump(self) -> dict:
+        plugins = []
+        if self.swiftonize_plugin:
+            plugins.append(
+                {
+                    "name": "Swiftonize",
+                    "package": "SwiftonizePlugin"
+                }
+            )
         return {
             "type": "target",
             "data": {
                 "name": self.name,
                 "dependencies": self.dump_dep(),
                 "resources": [res.dump for res in self.resources],
-                "linker_settings": [linker.dump for linker in self.linker_settings]
+                "linker_settings": [linker.dump for linker in self.linker_settings],
+                "plugins": plugins
             }
         }
 

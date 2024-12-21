@@ -13,6 +13,7 @@ from typing import Generator
 import subprocess
 from datetime import datetime
 
+
 def copy_package_content(cls: "SwiftPackage"):
     print(cls.get_binary_targets)
 
@@ -207,6 +208,10 @@ class SwiftPackage:
         if self.include_pythoncore:
             deps.append( 
                 SwiftPackage.Dependency("https://github.com/KivySwiftLink/PythonCore", next_major="311.0.0")
+            )
+        if any([target.swiftonize_plugin for target in self.targets]):
+            deps.append(
+                SwiftPackage.Dependency("https://github.com/PythonSwiftLink/SwiftonizePlugin", next_major="0.0.0")
             )
         return deps
     
