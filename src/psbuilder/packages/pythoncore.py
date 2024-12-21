@@ -15,7 +15,7 @@ class PythonCoreTarget(SwiftTarget):
     
     name = "PythonCore"
     
-    dependencies = ["PythonLibrary"]
+    dependencies = ["PythonExtra"]
     
     recipes = [
         python3.recipe,
