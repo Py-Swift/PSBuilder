@@ -22,6 +22,19 @@ class PythonCoreTarget(SwiftTarget):
         openssl.recipe,
         libffi.recipe
     ]
+    
+    @property
+    def linker_settings(self) -> list[SwiftTarget.LinkerSetting]:
+        output = [SwiftTarget.LinkerSetting("libz", "library")]
+        for recipe in self.recipes:
+            if hasattr(recipe, "pbx_frameworks"):
+                for pbx in recipe.pbx_frameworks:
+                    output.append(SwiftTarget.LinkerSetting(pbx))
+            if hasattr(recipe, "pbx_libraries"):
+                for lib in recipe.pbx_libraries:
+                    output.append(SwiftTarget.LinkerSetting(lib,"library"))
+        
+        return output
 
 class PythonLibrary(SwiftTarget):
     
