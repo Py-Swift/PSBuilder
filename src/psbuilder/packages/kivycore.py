@@ -18,7 +18,9 @@ class KivyTarget(SwiftTarget):
     ]
 
     dependencies = [
-        PackageDependency("SDL2Core", "SDL2Core")
+        PackageDependency("SDL2Core", "SDL2Core"),
+        PackageDependency("SwiftonizeModules", "PythonSwiftLink"),
+        PackageDependency("PythonCore", "PythonCore")
     ]
 
 class KivyCore(CythonSwiftPackage):
