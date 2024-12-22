@@ -246,8 +246,14 @@ class SwiftPackage:
     def zip_dist_files_to_export(self):
         root = join(self.swift_package_dir, "dist_files")
         has_dist_files = False
+        platforms_to_build = dict()
         for plat in self.ctx.supported_platforms:
-            plat_root = join(root, plat.name)
+            if plat.sdk in platforms_to_build:
+                continue
+            platforms_to_build[plat.sdk] = plat
+        
+        for plat in platforms_to_build.values():
+            plat_root = join(root, plat.sdk)
             for recipe in self.get_all_targets_recipes():
                 recipe_root = join(plat_root, recipe.name)
                 ensure_dir(plat_root)

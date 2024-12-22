@@ -37,7 +37,7 @@ class PythonExtra(SwiftTarget):
     
     dependencies = ["libpython3.11"]
     
-    
+
 ########################################################################################
 
 class PythonCore(SwiftPackage):
@@ -87,9 +87,11 @@ class PythonCore(SwiftPackage):
             
         for plat in self.xc_platforms:
             xc_plat = join(xc, plat)
+            xc_target = join(xc_plat, py_headers_fn)
+            if os.path.exists(xc_target): continue
             shutil.copytree(
                 py_headers,
-                join(xc_plat, py_headers_fn)
+                xc_target
             )
         
         self.process_plist(
