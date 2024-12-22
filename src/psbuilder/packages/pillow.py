@@ -12,6 +12,7 @@ class PillowTarget(SwiftTarget):
     
     dependencies = [
         PackageDependency("libjpeg", "ImageCore"),
+        PackageDependency("freetype", "FreeType"),
     ]
     
     recipes = [
@@ -35,7 +36,8 @@ class Pillow(CythonSwiftPackage):
     @property
     def dependencies(self) -> list[SwiftPackage.Dependency]:
         return [
-            SwiftPackage.Dependency("https://github.com/KivySwiftLink/ImageCore", version=self.version)
+            SwiftPackage.Dependency("https://github.com/KivySwiftLink/ImageCore", version=self.version),
+            SwiftPackage.Dependency("https://github.com/KivySwiftLink/FreeType", version=self.version)
         ]
     
     site_package_targets = [
