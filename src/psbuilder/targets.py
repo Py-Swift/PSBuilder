@@ -66,7 +66,11 @@ class SwiftTarget:
                     output.append(SwiftTarget.LinkerSetting(pbx))
             if hasattr(recipe, "pbx_libraries"):
                 for lib in recipe.pbx_libraries:
-                    output.append(SwiftTarget.LinkerSetting(lib,"library"))
+                    lib: str = lib
+                    if lib.startswith("lib"):
+                        output.append(SwiftTarget.LinkerSetting(lib.removeprefix("lib"),"library"))
+                    else:
+                         output.append(SwiftTarget.LinkerSetting(lib,"library"))
         
         return output
     
