@@ -24,6 +24,7 @@ class PackageContext(Context):
         self.selected_platforms = [*platforms]
         
         self.site_packages_root = join(self.dist_dir, "root/python3/lib/python3.11/site-packages")
+        self.hostpython_ver = "3.11"
         #self.package_state = JsonStore(join(self.dist_dir, "state.db"))
         
     
