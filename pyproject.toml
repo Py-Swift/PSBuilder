@@ -22,4 +22,4 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [tool.uv.sources]
-kivy-ios = { git = "https://github.com/kivy/kivy-ios", rev = "master" }
+kivy-ios = { git = "https://github.com/kivyswiftlink/kivy-ios", rev = "master" }
