@@ -78,7 +78,6 @@ class SDL2Core(SwiftPackage):
         for plat in self.xc_platforms:
             xc_plat = join(xc, plat)
             xc_target = join(xc_plat, sdl_header_fn)
-            os.mkdir(xc_target)
             if os.path.exists(xc_target): continue
             
             shutil.copytree(
