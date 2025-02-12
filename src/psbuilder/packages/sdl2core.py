@@ -36,7 +36,7 @@ class SDL2Core(SwiftPackage):
     include_pythonswiftlink = True
     
     products = [
-        SwiftPackage.Product("SDL2Core", ["SDL2Core", "libSDL"])
+        SwiftPackage.Product("SDL2Core", ["SDL2Core", "libSDL2"])
     ]
     
     targets = [
@@ -83,6 +83,13 @@ class SDL2Core(SwiftPackage):
             join(xc,"Info.plist"),
             sdl_header_fn
         )
+        
+    def pre_zip_xc_frameworks(self):
+        for xc in self.get_all_xcframeworks():
+            xc_name = basename(xc)
+            if xc_name.startswith("libSDL2"):
+                self.process_xc(xc)
+        return super().pre_zip_xc_frameworks()
 
     module_map = """
         module SDL [extern_c] {
