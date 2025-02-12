@@ -44,6 +44,13 @@ class SDL2Core(SwiftPackage):
     ]
     
     @property
+    def xc_platforms(self) -> list[str]:
+        return [
+            "ios-arm64",
+            "ios-arm64_x86_64-simulator"
+        ]
+    
+    @property
     def dependencies(self) -> list[SwiftPackage.Dependency]:
         return [
             SwiftPackage.Dependency("https://github.com/KivySwiftLink/ImageCore", version=self.version)
