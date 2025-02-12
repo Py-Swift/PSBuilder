@@ -36,7 +36,7 @@ class SDL2Core(SwiftPackage):
     include_pythonswiftlink = True
     
     products = [
-        SwiftPackage.Product("SDL2Core", ["SDL2Core"])
+        SwiftPackage.Product("SDL2Core", ["SDL2Core", "libSDL"])
     ]
     
     targets = [
