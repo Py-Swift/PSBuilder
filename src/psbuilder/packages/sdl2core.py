@@ -93,7 +93,7 @@ class SDL2Core(SwiftPackage):
     def pre_zip_xc_frameworks(self):
         for xc in self.get_all_xcframeworks():
             xc_name = basename(xc)
-            if xc_name.startswith("libSDL2"):
+            if xc_name == "libSDL2":
                 self.process_xc(xc)
         return super().pre_zip_xc_frameworks()
 
