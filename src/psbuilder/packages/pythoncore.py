@@ -15,7 +15,9 @@ class PythonCoreTarget(SwiftTarget):
     
     name = "PythonCore"
     
-    dependencies = ["PythonExtra"]
+    dependencies = [
+        
+    ]
     
     recipes = [
         python3.recipe,
@@ -31,11 +33,6 @@ class PythonLibrary(SwiftTarget):
     
     resources = [SwiftTarget.Resource("lib")]
     
-class PythonExtra(SwiftTarget):
-    
-    name = "PythonExtra"
-    
-    dependencies = ["libpython3.11"]
     
 
 ########################################################################################
