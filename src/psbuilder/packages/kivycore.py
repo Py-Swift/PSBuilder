@@ -11,7 +11,7 @@ class KivyTarget(SwiftTarget):
     
     name = "KivyCore"
     
-    pyswiftpackage = True
+    pyswiftwrapper = True
     
     recipes = [
         KivyRecipe()
