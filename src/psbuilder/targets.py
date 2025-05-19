@@ -108,13 +108,20 @@ class SwiftTarget:
     @property
     def dump(self) -> dict:
         plugins = []
-        if self.swiftonize_plugin:
+        if self.pyswiftwrapper:
             plugins.append(
                 {
-                    "name": "Swiftonize",
-                    "package": "SwiftonizePlugin"
+                    "name": "PySwiftWrapper",
+                    "package": "PySwiftWrapper"
                 }
             )
+        # if self.swiftonize_plugin:
+        #     plugins.append(
+        #         {
+        #             "name": "Swiftonize",
+        #             "package": "SwiftonizePlugin"
+        #         }
+        #     )
         return {
             "type": "target",
             "data": {
