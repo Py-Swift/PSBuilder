@@ -11,7 +11,7 @@ class KivyTarget(SwiftTarget):
     
     name = "KivyCore"
     
-    swiftonize_plugin = False
+    pyswiftpackage = True
     
     recipes = [
         KivyRecipe()

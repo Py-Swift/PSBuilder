@@ -54,8 +54,8 @@ class SwiftTarget:
     recipes: list[_Recipe] = []
     dependencies: list[PackageDependency | str ] = []
     resources: list[Resource] = []
-    swiftonize_plugin: bool = False
-    
+    #swiftonize_plugin: bool = False
+    pyswiftwrapper: bool = False
     
     @property
     def linker_settings(self) -> list[LinkerSetting]:

@@ -212,7 +212,8 @@ class SwiftPackage:
             )
         if any([target.swiftonize_plugin for target in self.targets]):
             deps.append(
-                SwiftPackage.Dependency("https://github.com/PythonSwiftLink/SwiftonizePlugin", next_major="0.0.0")
+                # SwiftPackage.Dependency("https://github.com/PythonSwiftLink/SwiftonizePlugin", next_major="0.0.0")
+                SwiftPackage.Dependency("https://github.com/PythonSwiftLink/PySwiftWrapper", next_major="0.0.0")
             )
         return deps
     
