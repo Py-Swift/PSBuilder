@@ -211,10 +211,11 @@ class SwiftPackage:
                 SwiftPackage.Dependency("https://github.com/KivySwiftLink/PythonCore", next_major="311.0.0")
             )
         if any([target.pyswiftwrapper for target in self.targets]):
-            deps.append(
-                # SwiftPackage.Dependency("https://github.com/PythonSwiftLink/SwiftonizePlugin", next_major="0.0.0")
-                SwiftPackage.Dependency("https://github.com/PythonSwiftLink/PySwiftWrapper", next_major="0.0.0")
-            )
+            # deps.append(
+            #     # SwiftPackage.Dependency("https://github.com/PythonSwiftLink/SwiftonizePlugin", next_major="0.0.0")
+            #     SwiftPackage.Dependency("https://github.com/PythonSwiftLink/PySwiftWrapper", next_major="0.0.0")
+            # )
+            pass
         return deps
     
     @property
