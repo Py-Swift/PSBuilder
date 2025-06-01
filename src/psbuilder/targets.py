@@ -109,16 +109,16 @@ class SwiftTarget:
     def dump(self) -> dict:
         plugins = []
         
-        if self.pyswiftwrapper:
+        # if self.pyswiftwrapper:
             # plugins.append(
             #     {
             #         "name": "PySwiftWrapper",
             #         "package": "PySwiftWrapper"
             #     }
             # )
-            self.dependencies.append(
-                SwiftTarget.PackageDependency("PySwiftWrapper", "PySwiftWrapper")
-            )
+            # self.dependencies.append(
+            #     SwiftTarget.PackageDependency("PySwiftWrapper", "PySwiftWrapper")
+            # )
         # if self.swiftonize_plugin:
         #     plugins.append(
         #         {
