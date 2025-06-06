@@ -20,7 +20,7 @@ class KivyNumpy(CythonSwiftPackage):
     include_pythoncore = True
     #include_pythonswiftlink = True
     
-    repo_url = "https://github.com/kivyswiftlink/KivyNumpy"
+    repo_url = "https://github.com/kv-swift/KivyNumpy"
     
     products = [
         SwiftPackage.Product("KivyNumpy", ["KivyNumpy"])

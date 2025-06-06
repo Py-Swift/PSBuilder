@@ -57,7 +57,7 @@ class KivyExtra(CythonSwiftPackage):
     include_pythoncore = True
     #include_pythonswiftlink = True
     
-    repo_url = "https://github.com/kivyswiftlink/KivyExtra"
+    repo_url = "https://github.com/kv-swift/KivyExtra"
     
     products = list(create_products())
     

@@ -23,7 +23,7 @@ class ImageCore(SwiftPackage):
     
     only_include_binary_targets = True
     
-    repo_url = "https://github.com/kivyswiftlink/ImageCore"
+    repo_url = "https://github.com/kv-swift/ImageCore"
     
     products = [
         SwiftPackage.Product("libpng", ["libpng16"]),

@@ -29,7 +29,7 @@ class KivyCore(CythonSwiftPackage):
     include_pythoncore = True
     include_pythonswiftlink = True
     
-    repo_url = "https://github.com/kivyswiftlink/KivyCore"
+    repo_url = "https://github.com/kv-swift/KivyCore"
     
     products = [
         SwiftPackage.Product("KivyCore", ["KivyCore"])
@@ -40,7 +40,7 @@ class KivyCore(CythonSwiftPackage):
     ]
     
     dependencies = [
-        SwiftPackage.Dependency("https://github.com/KivySwiftLink/SDL2Core", next_major="311.0.0")
+        SwiftPackage.Dependency("https://github.com/kv-swift/SDL2Core", next_major="311.0.0")
     ]
 
     site_package_targets = [

@@ -39,7 +39,7 @@ class PythonLibrary(SwiftTarget):
 
 class PythonCore(SwiftPackage):
     
-    repo_url = "https://github.com/kivyswiftlink/PythonCore"
+    repo_url = "https://github.com/kv-swift/PythonCore"
     #include_pythonswiftlink = True
     
     products = [

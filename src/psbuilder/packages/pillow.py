@@ -36,8 +36,8 @@ class Pillow(CythonSwiftPackage):
     @property
     def dependencies(self) -> list[SwiftPackage.Dependency]:
         return [
-            SwiftPackage.Dependency("https://github.com/KivySwiftLink/ImageCore", version=self.version),
-            SwiftPackage.Dependency("https://github.com/KivySwiftLink/FreeType", version=self.version)
+            SwiftPackage.Dependency("https://github.com/kv-swift/ImageCore", version=self.version),
+            SwiftPackage.Dependency("https://github.com/kv-swift/FreeType", version=self.version)
         ]
     
     site_package_targets = [

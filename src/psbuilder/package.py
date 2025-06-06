@@ -176,7 +176,7 @@ class SwiftPackage:
                 BinaryTarget(
                     splitext(basename(src))[0],
                     src,
-                    "kivyswiftlink",
+                    "kv-swift",
                     self.__class__.__name__,
                     self.version
                 )
@@ -203,12 +203,12 @@ class SwiftPackage:
         deps = list(self.dependencies)
         if self.include_pythonswiftlink:
             deps.append(
-                # SwiftPackage.Dependency("https://github.com/KivySwiftLink/PythonSwiftLink", next_major="311.1.0")
-                SwiftPackage.Dependency("https://github.com/KivySwiftLink/PySwiftKit", next_major="311.0.0")
+                # SwiftPackage.Dependency("https://github.com/kv-swift/PythonSwiftLink", next_major="311.1.0")
+                SwiftPackage.Dependency("https://github.com/kv-swift/PySwiftKit", next_major="311.0.0")
             )
         if self.include_pythoncore:
             deps.append( 
-                SwiftPackage.Dependency("https://github.com/KivySwiftLink/PythonCore", next_major="311.0.0")
+                SwiftPackage.Dependency("https://github.com/kv-swift/PythonCore", next_major="311.0.0")
             )
         if any([target.pyswiftwrapper for target in self.targets]):
             # deps.append(

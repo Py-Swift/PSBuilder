@@ -18,7 +18,7 @@ class FreeType(SwiftPackage):
     
     only_include_binary_targets = True
     
-    repo_url = "https://github.com/kivyswiftlink/FreeType"
+    repo_url = "https://github.com/kv-swift/FreeType"
     
     products = [
         SwiftPackage.Product("freetype", ["libfreetype"]),

@@ -30,7 +30,7 @@ class SDL2CoreTarget(SwiftTarget):
 
 class SDL2Core(SwiftPackage):
     
-    repo_url = "https://github.com/kivyswiftlink/SDL2Core"
+    repo_url = "https://github.com/kv-swift/SDL2Core"
     
     include_pythoncore = True
     include_pythonswiftlink = True
@@ -53,7 +53,7 @@ class SDL2Core(SwiftPackage):
     @property
     def dependencies(self) -> list[SwiftPackage.Dependency]:
         return [
-            SwiftPackage.Dependency("https://github.com/KivySwiftLink/ImageCore", version=self.version)
+            SwiftPackage.Dependency("https://github.com/kv-swift/ImageCore", version=self.version)
         ]
         
     def process_plist(self, plist: str, header_fn: str):
