@@ -11,8 +11,8 @@ class PillowTarget(SwiftTarget):
     name = "Pillow"
     
     dependencies = [
-        PackageDependency("libjpeg", "ImageCore"),
-        PackageDependency("freetype", "FreeType"),
+        PackageDependency.product("libjpeg", "ImageCore"),
+        PackageDependency.product("freetype", "FreeType"),
     ]
     
     recipes = [

@@ -24,7 +24,7 @@ class SDL2CoreTarget(SwiftTarget):
     ]
     
     dependencies = [
-        PackageDependency("libpng", "ImageCore"),
+        PackageDependency.product("libpng", "ImageCore"),
     ]
 
 

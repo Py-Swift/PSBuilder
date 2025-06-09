@@ -17,6 +17,15 @@ class SwiftTarget:
             self.condition = condition
             self.type = _type
             
+        @staticmethod
+        def product(name: str, package: str, condition: dict | None = None) -> "SwiftTarget.PackageDependency":
+            SwiftTarget.PackageDependency(name, package, "product", condition)
+        
+        @staticmethod
+        def target(name: str, package: str, condition: dict | None = None) -> "SwiftTarget.PackageDependency":
+            SwiftTarget.PackageDependency(name, package, "target", condition)
+        
+            
         @property
         def dump(self) -> dict:
             data = {
