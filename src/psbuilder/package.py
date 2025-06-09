@@ -25,8 +25,11 @@ class SwiftPackage:
     class Product:
         name: str
         targets: list[str]
-        
-        def __init__(self, name: str, targets: list[str]):
+        ios_only: bool
+        mac_only: bool
+        def __init__(self, name: str, targets: list[str], ios_only: bool = False, mac_only: bool = False):
+            self.mac_only = mac_only
+            self.ios_only = ios_only
             self.name = name
             self.targets = targets
         
@@ -76,6 +79,7 @@ class SwiftPackage:
             
     ctx: PackageContext | None
     products: list[Product] = []
+    macos: bool = False
     dependencies: list[Dependency] = []
     targets: list[SwiftTarget]
     version: str = "311.0.0"
@@ -234,6 +238,7 @@ class SwiftPackage:
     def dump(self) -> dict:
         return {
             "name": self.__class__.__name__,
+            "macos": self.macos,
             "products": [p.dump for p in self.products],
             "dependencies": [dep.dump for dep in self.get_dependencies],
             "targets": [target.dump for target in self.all_targets],
@@ -364,7 +369,7 @@ class PythonSwiftPackage(SwiftPackage):
 
 class CythonSwiftPackage(PythonSwiftPackage):
     
-    ...
+    pass
     
     
     

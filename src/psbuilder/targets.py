@@ -8,32 +8,42 @@ class SwiftTarget:
     class PackageDependency:
         name: str
         package: str
+        condition: dict | None = None
         
-        def __init__(self, name: str, package: str):
+        def __init__(self, name: str, package: str, condition: dict | None = None):
             self.name = name
             self.package = package
+            self.condition = condition
             
         @property
         def dump(self) -> dict:
-            return {
+            data = {
                 "name": self.name,
                 "package": self.package
             }
+            if self.condition:
+                data["condition"] = self.condition
+            return data
             
     class LinkerSetting:
         kind: str
         name: str
+        condition: dict | None = None
         
-        def __init__(self, name: str, kind: str = "framework"):
+        def __init__(self, name: str, kind: str = "framework", condition: dict | None = None):
+            self.condition = condition
             self.kind = kind
             self.name = name
             
         @property
         def dump(self) -> dict:
-            return {
+            data = {
                 "kind": self.kind,
                 "name": self.name
             }
+            if self.condition:
+                data["condition"] = self.condition
+            return data
     class Resource:
         kind: str
         path: str
@@ -57,22 +67,37 @@ class SwiftTarget:
     #swiftonize_plugin: bool = False
     pyswiftwrapper: bool = False
     
+    ios_only: list[str] = []
+    macos_only: list[str] = []
+    
+    linker_libraries: list[LinkerSetting] = []
+    
     @property
     def linker_settings(self) -> list[LinkerSetting]:
         output = []
         for recipe in self.recipes:
             if hasattr(recipe, "pbx_frameworks"):
                 for pbx in recipe.pbx_frameworks:
-                    output.append(SwiftTarget.LinkerSetting(pbx))
+                    condition = None
+                    if pbx in self.ios_only:
+                        condition = {"platform": "ios"}
+                    elif pbx in self.macos_only:
+                        condition = {"platform": "macos"}
+                    output.append(SwiftTarget.LinkerSetting(pbx, condition=condition))
             if hasattr(recipe, "pbx_libraries"):
                 for lib in recipe.pbx_libraries:
                     lib: str = lib
+                    condition = None
+                    if lib in self.ios_only:
+                        condition = {"platform": "ios"}
+                    elif lib in self.macos_only:
+                        condition = {"platform": "macos"}
                     if lib.startswith("lib"):
-                        output.append(SwiftTarget.LinkerSetting(lib.removeprefix("lib"),"library"))
+                        output.append(SwiftTarget.LinkerSetting(lib.removeprefix("lib"),"library", condition))
                     else:
-                         output.append(SwiftTarget.LinkerSetting(lib,"library"))
+                         output.append(SwiftTarget.LinkerSetting(lib,"library", condition))
         
-        return output
+        return output + self.linker_libraries
     
     @property
     def xcframeworks(self) -> list[str]:
@@ -88,7 +113,8 @@ class SwiftTarget:
                 case str():
                     deps.append({
                         "type": "string",
-                        "data": dep
+                        "data": dep,
+                        "condition": {"platform": "ios"} if dep in self.ios_only else {"platform": "macos"} if dep in self.macos_only else None
                     })
                 case _:
                     deps.append({
@@ -99,7 +125,8 @@ class SwiftTarget:
             fn, ext = splitext(basename(xc))
             deps.append({
                         "type": "string",
-                        "data": fn
+                        "data": fn,
+                        "condition": {"platform": "ios"} if fn in self.ios_only else {"platform": "macos"} if fn in self.macos_only else None
                     })
         return deps
                     
