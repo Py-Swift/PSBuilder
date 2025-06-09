@@ -9,11 +9,13 @@ class SwiftTarget:
         name: str
         package: str
         condition: dict | None = None
+        type: str
         
-        def __init__(self, name: str, package: str, condition: dict | None = None):
+        def __init__(self, name: str, package: str, _type: str = "target", condition: dict | None = None):
             self.name = name
             self.package = package
             self.condition = condition
+            self.type = _type
             
         @property
         def dump(self) -> dict:
@@ -93,9 +95,9 @@ class SwiftTarget:
                     elif lib in self.macos_only:
                         condition = {"platform": "macos"}
                     if lib.startswith("lib"):
-                        output.append(SwiftTarget.LinkerSetting(lib.removeprefix("lib"),"library", condition))
+                        output.append(SwiftTarget.LinkerSetting(lib.removeprefix("lib"),"library", condition=condition))
                     else:
-                         output.append(SwiftTarget.LinkerSetting(lib,"library", condition))
+                         output.append(SwiftTarget.LinkerSetting(lib,"library", condition=condition))
         
         return output + self.linker_libraries
     
