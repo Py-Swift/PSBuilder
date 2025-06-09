@@ -21,7 +21,8 @@ class SwiftTarget:
         def dump(self) -> dict:
             data = {
                 "name": self.name,
-                "package": self.package
+                "package": self.package,
+                "type": self.type
             }
             if self.condition:
                 data["condition"] = self.condition
