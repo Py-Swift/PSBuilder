@@ -135,7 +135,10 @@ class PythonCore(SwiftPackage):
             join(unpack_dir, "macos-arm64_x86_64"),
             join(xc, "macos-arm64_x86_64"),
         )
-        
+        shutil.move(
+            join(xc, "macos-arm64_x86_64", "Headers"),
+            join(xc, "macos-arm64_x86_64", "python3.11")
+        )
         
         os.remove(python_zip)
     
