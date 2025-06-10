@@ -7,11 +7,11 @@ class SwiftTarget:
     
     class PackageDependency:
         name: str
-        package: str
+        package: str | None
         condition: dict | None = None
         type: str
         
-        def __init__(self, name: str, package: str, _type: str = "target", condition: dict | None = None):
+        def __init__(self, name: str, package: str | None = None, _type: str = "target", condition: dict | None = None):
             self.name = name
             self.package = package
             self.condition = condition
@@ -19,20 +19,24 @@ class SwiftTarget:
             
         @staticmethod
         def product(name: str, package: str, condition: dict | None = None) -> "SwiftTarget.PackageDependency":
-            SwiftTarget.PackageDependency(name, package, "product", condition)
+            return SwiftTarget.PackageDependency(name, package, "product", condition)
         
         @staticmethod
-        def target(name: str, package: str, condition: dict | None = None) -> "SwiftTarget.PackageDependency":
-            SwiftTarget.PackageDependency(name, package, "target", condition)
+        def target(name: str, condition: dict | None = None) -> "SwiftTarget.PackageDependency":
+            return SwiftTarget.PackageDependency(name, _type="target",condition=condition)
         
+        @staticmethod
+        def string(name: str, condition: dict | None = None) -> "SwiftTarget.PackageDependency":
+            return SwiftTarget.PackageDependency(name, _type="string", condition=condition)
             
         @property
         def dump(self) -> dict:
             data = {
                 "name": self.name,
-                "package": self.package,
                 "type": self.type
             }
+            if self.package:
+                data["package"] = self.package
             if self.condition:
                 data["condition"] = self.condition
             return data
@@ -121,13 +125,26 @@ class SwiftTarget:
     def dump_dep(self) -> list[dict | str]:
         deps = []
         for dep in self.dependencies:
+            
             match dep:
                 case str():
-                    deps.append({
-                        "type": "string",
-                        "data": dep,
-                        "condition": {"platform": "ios"} if dep in self.ios_only else {"platform": "macos"} if dep in self.macos_only else None
-                    })
+                    if dep in self.ios_only:
+                        deps.append({
+                                    "type": "target",
+                                    "data": dep,
+                                    "condition": {"platform": "ios"}
+                                })
+                    elif dep in self.macos_only:
+                        deps.append({
+                                    "type": "target",
+                                    "data": dep,
+                                    "condition": {"platform": "macos"}
+                                })
+                    else:
+                        deps.append({
+                            "type": "string",
+                            "data": dep
+                        })
                 case _:
                     deps.append({
                         "type": "dependency",
@@ -135,11 +152,34 @@ class SwiftTarget:
                     })
         for xc in self.xcframeworks:
             fn, ext = splitext(basename(xc))
-            deps.append({
-                        "type": "string",
-                        "data": fn,
-                        "condition": {"platform": "ios"} if fn in self.ios_only else {"platform": "macos"} if fn in self.macos_only else None
-                    })
+            if fn in self.ios_only:
+                deps.append({
+                            "type": "dependency",
+                            "data": {
+                                    "name": fn,
+                                    "type": "target",
+                                    "condition": {"platform": "ios"}
+                                },
+                            
+                        })
+            elif fn in self.macos_only:
+                deps.append({
+                            "type": "dependency",
+                            "data": {
+                                    "name": fn,
+                                    "type": "target",
+                                    "condition": {"platform": "macos"}
+                                },
+                            
+                        })
+            else:
+                deps.append({
+                            "type": "dependency",
+                            "data": {
+                                    "name": fn,
+                                    "type": "target"
+                                }
+                        })
         return deps
                     
         
